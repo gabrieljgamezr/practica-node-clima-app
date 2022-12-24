@@ -29,9 +29,12 @@ export default class Busquedas {
 
             const respuesta = await intance.get();
 
-            console.log(respuesta.data);
-
-            return []; // Regresar los lugares que coincidan
+            return respuesta.data.features.map(lugar => ({
+                id: lugar.id,
+                nombre: lugar.place_name,
+                lng: lugar.center[0],
+                lat: lugar.center[1]
+            }));
 
         } catch (error) {
             return [];
