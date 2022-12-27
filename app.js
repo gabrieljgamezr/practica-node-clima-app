@@ -1,4 +1,7 @@
 import * as dotenv from 'dotenv';
+// import * as prueba from '/prueba.json';
+
+
 dotenv.config();
 
 import { inquirerMenu, leerInput, listarLugares, pausa } from "./helpers/inquirer.js";
@@ -29,14 +32,19 @@ const main = async() => {
                 const lugarSeleccionado = lugares.find( l => l.id === id);
                 
                 // Datos del clima.
+
+                const clima = await busquedas.climaLugar( lugarSeleccionado.lat, lugarSeleccionado.lng );
+
                 // Mostrar resultados.
+                console.clear();
                 console.log('\nInformación de la Ciudad\n'.blue);
-                console.log('Ciudad:', lugarSeleccionado.nombre );
+                console.log('Ciudad:', lugarSeleccionado.nombre.blue);
                 console.log('Lat:', lugarSeleccionado.lat);
                 console.log('Lng:', lugarSeleccionado.lng);
-                console.log('Temperatura:',);
-                console.log('Mínima:',);
-                console.log('Máxima:',);
+                console.log('Temperatura: ', clima.temp);
+                console.log('Mínima: ', clima.min);
+                console.log('Máxima: ', clima.max);
+                console.log('Cómo está el clima: ', clima.desc);
                 await pausa();
                 break;
             case 2:
